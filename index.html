@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>PhishGuard — Stop Phishing Before You Click</title>
+  <meta name="description" content="PhishGuard detects fake links and QR code scams — and explains exactly why they're dangerous."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="url(#g1)"/>
+          <defs><linearGradient id="g1" x1="3" y1="2" x2="21" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#c4b5fd"/></linearGradient></defs>
+        </svg>
+      </div>
+      PhishGuard
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#demo">URL Check</a></li>
+        <li><a href="#qr">QR Scanner</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <button class="btn btn-ghost-sm" onclick="openBlocklistModal()" style="position:relative">
+        🚫 Blocked
+        <span id="blocklistBadge" class="blocklist-badge" style="display:none">0</span>
+      </button>
+      <button class="btn btn-primary-sm" onclick="openInstallModal()">Install Free</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <div class="hero-pill"><span class="pill-dot"></span> Real-time phishing protection</div>
+      <h1>Stop Phishing Attacks <span class="text-gradient">Before You Click</span></h1>
+      <p class="hero-desc">PhishGuard instantly detects fake links and scam emails — and explains <em>exactly why</em> they are dangerous.</p>
+      <div class="hero-cta">
+        <button class="btn btn-hero" onclick="openInstallModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="currentColor"/></svg>
+          Install Extension
+        </button>
+        <a href="#demo" class="btn btn-outline-hero">See How It Works</a>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item"><span class="meta-stars">★★★★★</span> 4.9/5 rating</div>
+        <div class="meta-sep"></div>
+        <div class="meta-item">🛡️ 2M+ links scanned</div>
+        <div class="meta-sep"></div>
+        <div class="meta-item">🔒 100% free</div>
+      </div>
+    </div>
+    <div class="mockup-wrap">
+      <div class="mockup-glow"></div>
+      <div class="browser-window">
+        <div class="bw-bar">
+          <div class="bw-dots"><span></span><span></span><span></span></div>
+          <div class="bw-url">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ef4444" stroke-width="2"/><path d="M12 8v4m0 4h.01" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="url-red">paypal-secure-login.tk</span>
+          </div>
+        </div>
+        <div class="bw-body">
+          <div class="fake-site">
+            <div class="fs-header"></div>
+            <div class="fs-form">
+              <div class="fs-label"></div><div class="fs-input"></div>
+              <div class="fs-label"></div><div class="fs-input"></div>
+              <div class="fs-btn"></div>
+            </div>
+          </div>
+          <div class="pg-alert">
+            <div class="pga-top">
+              <div class="pga-icon">🛡️</div>
+              <div><div class="pga-title">PhishGuard Warning</div><div class="pga-sub">Threat detected</div></div>
+              <div class="pga-badge">DANGER</div>
+            </div>
+            <div class="pga-reason">⚠️ Domain mismatch — this is NOT the real PayPal</div>
+            <div class="pga-checks">
+              <div class="pga-check red">✕ High-risk .tk domain extension</div>
+              <div class="pga-check red">✕ Contains phishing keyword "secure-login"</div>
+              <div class="pga-check yellow">! Not in trusted domain registry</div>
+            </div>
+            <div class="pga-actions">
+              <button class="pga-safe">← Go Back (Safe)</button>
+              <button class="pga-risk">Proceed at risk</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mockup-float mockup-float-1"><span>✅</span> github.com — Verified Safe</div>
+      <div class="mockup-float mockup-float-2"><span>🚨</span> Phishing blocked!</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-section">
+  <div class="ticker-label">🔴 LIVE THREATS</div>
+  <div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>
+</div>
+
+<!-- COUNTERS -->
+<div class="counters-section">
+  <div class="container">
+    <div class="counters-grid">
+      <div class="counter-item reveal">
+        <div class="counter-num" data-target="2000000">0</div>
+        <div class="counter-label">Links Scanned</div>
+      </div>
+      <div class="counter-item reveal">
+        <div class="counter-num" data-target="48000">0</div>
+        <div class="counter-label">Threats Blocked</div>
+      </div>
+      <div class="counter-item reveal">
+        <div class="counter-num" data-target="99">0</div>
+        <div class="counter-label">Detection Accuracy</div>
+      </div>
+      <div class="counter-item reveal">
+        <div class="counter-num" data-target="150">0</div>
+        <div class="counter-label">Response Time (ms)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-tag reveal">Protection Suite</div>
+    <h2 class="section-title reveal">Everything you need to <span class="text-gradient">stay safe online</span></h2>
+    <div class="features-grid">
+      <div class="feat-card feat-large reveal">
+        <div class="feat-icon">🔍</div>
+        <h3>Smart Link Analysis</h3>
+        <p>Detects fake domains, typosquatting, suspicious TLDs, and lookalike characters in real time — before you click.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">💬</div>
+        <h3>Explainable Warnings</h3>
+        <p>Shows exactly WHY a link is unsafe, not just a generic alert.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📷</div>
+        <h3>QR Code Scanner</h3>
+        <p>Scan QR codes from camera or image files — PhishGuard checks the hidden URL before you visit it.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">🌍</div>
+        <h3>Community Intelligence</h3>
+        <p>One reported scam protects all users instantly across the network.</p>
+      </div>
+      <div class="feat-card feat-large reveal">
+        <div class="feat-icon">🔒</div>
+        <h3>Privacy First</h3>
+        <p>No tracking, no personal data collection. Your browsing stays yours — we only analyze URLs, never your identity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URL DEMO -->
+<section class="demo" id="demo">
+  <div class="container">
+    <div class="section-tag reveal">Live Demo</div>
+    <h2 class="section-title reveal">Check any URL <span class="text-gradient">right now</span></h2>
+    <p class="section-desc reveal" style="margin:0 auto 40px">Paste any link below and see exactly what PhishGuard detects — no install needed.</p>
+    <div class="demo-box">
+      <form class="demo-form" id="demoForm">
+        <div class="demo-field">
+          <div class="demo-field-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="#8892b0" stroke-width="2" stroke-linecap="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="#8892b0" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <input type="text" id="urlInput" placeholder="https://example.com or paste any suspicious link..." autocomplete="off" spellcheck="false"/>
+          <button type="submit" class="btn btn-primary-sm demo-btn">Analyze</button>
+        </div>
+      </form>
+      <div class="demo-examples">
+        <span>Try:</span>
+        <button class="demo-ex" onclick="tryExample('https://github.com')">github.com</button>
+        <button class="demo-ex" onclick="tryExample('http://paypal-secure-login.tk/verify')">paypal-secure-login.tk</button>
+        <button class="demo-ex" onclick="tryExample('https://amaz0n-deals.xyz')">amaz0n-deals.xyz</button>
+      </div>
+      <div class="demo-result" id="demoResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- QR SCANNER -->
+<section class="qr-section" id="qr">
+  <div class="container">
+    <div class="section-tag reveal">New Feature</div>
+    <h2 class="section-title reveal">QR Code <span class="text-gradient">Threat Scanner</span></h2>
+    <p class="section-desc reveal" style="margin:0 auto 40px">QR codes can hide dangerous URLs. Scan with your camera or upload an image — PhishGuard checks the link instantly.</p>
+    <div class="qr-box reveal">
+      <div class="qr-tabs">
+        <button class="qr-tab active" id="tabCamera" onclick="switchTab('camera')">📷 Camera</button>
+        <button class="qr-tab" id="tabUpload" onclick="switchTab('upload')">🖼️ Upload Image</button>
+      </div>
+
+      <!-- Camera Panel -->
+      <div class="qr-panel" id="panelCamera">
+        <div class="qr-video-wrap" id="videoWrap">
+          <video id="qrVideo" autoplay playsinline muted></video>
+          <canvas id="qrCanvas" style="display:none"></canvas>
+          <div class="qr-scan-line"></div>
+          <div class="qr-corners">
+            <span class="qr-corner tl"></span><span class="qr-corner tr"></span>
+            <span class="qr-corner bl"></span><span class="qr-corner br"></span>
+          </div>
+        </div>
+        <div class="qr-cam-controls">
+          <button class="btn btn-primary-sm" id="startCamBtn" onclick="startCamera()">Start Camera</button>
+          <button class="btn btn-ghost-sm" id="stopCamBtn" onclick="stopCamera()" style="display:none">Stop Camera</button>
+        </div>
+        <p class="qr-hint">Point your camera at a QR code — it will be scanned automatically.</p>
+      </div>
+
+      <!-- Upload Panel -->
+      <div class="qr-panel" id="panelUpload" style="display:none">
+        <label class="qr-upload-area" for="qrFileInput">
+          <div class="qr-upload-icon">📁</div>
+          <div class="qr-upload-text">Drop an image here or <span>browse files</span></div>
+          <div class="qr-upload-sub">PNG, JPG, GIF, WebP supported</div>
+          <input type="file" id="qrFileInput" accept="image/*" onchange="handleQrFile(event)" style="display:none"/>
+        </label>
+      </div>
+
+      <!-- QR Result -->
+      <div class="qr-result" id="qrResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw" id="how">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:0">
+      <div class="section-tag reveal" style="justify-content:center;display:flex">Simple Process</div>
+      <h2 class="section-title reveal" style="text-align:center">How PhishGuard <span class="text-gradient">works</span></h2>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-step reveal">
+        <div class="hiw-num">01</div>
+        <div class="hiw-line"></div>
+        <div class="hiw-content">
+          <div class="hiw-icon">🔌</div>
+          <h3>Install the Extension</h3>
+          <p>One click from the Chrome, Firefox, or Edge store. No account needed.</p>
+        </div>
+      </div>
+      <div class="hiw-step reveal">
+        <div class="hiw-num">02</div>
+        <div class="hiw-line"></div>
+        <div class="hiw-content">
+          <div class="hiw-icon">🖱️</div>
+          <h3>Browse Normally</h3>
+          <p>PhishGuard runs silently in the background — no setup, no configuration.</p>
+        </div>
+      </div>
+      <div class="hiw-step reveal">
+        <div class="hiw-num">03</div>
+        <div class="hiw-line hiw-line-last"></div>
+        <div class="hiw-content">
+          <div class="hiw-icon">🛡️</div>
+          <h3>Get Instant Alerts</h3>
+          <p>Dangerous links trigger a clear warning with a full explanation before any damage happens.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="trust" id="reviews">
+  <div class="container">
+    <div class="section-tag reveal">Testimonials</div>
+    <h2 class="section-title reveal">Trusted by <span class="text-gradient">thousands of users</span></h2>
+    <div class="trust-pills">
+      <div class="trust-pill reveal">✅ 4.9★ Chrome Store</div>
+      <div class="trust-pill reveal">🔒 Zero data collection</div>
+      <div class="trust-pill reveal">⚡ &lt;150ms detection</div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="tcard reveal">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"Almost clicked a fake PayPal link. PhishGuard caught it instantly and explained exactly what was wrong. Saved me from a nightmare."</p>
+        <div class="tcard-author">
+          <div class="tcard-av">SR</div>
+          <div><strong>Sarah R.</strong><span>Freelance Designer</span></div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"The QR scanner is a game changer. I scanned a code at a restaurant and it flagged a redirect to a phishing site. Incredible."</p>
+        <div class="tcard-author">
+          <div class="tcard-av">MK</div>
+          <div><strong>Marcus K.</strong><span>IT Security Analyst</span></div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars">★★★★★</div>
+        <p>"Finally a security tool that explains WHY something is dangerous. My whole team uses it now. Simple, fast, and actually useful."</p>
+        <div class="tcard-author">
+          <div class="tcard-av">PL</div>
+          <div><strong>Priya L.</strong><span>Product Manager</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="fcta-glow"></div>
+  <div class="container fcta-inner">
+    <span class="fcta-shield">🛡️</span>
+    <h2>Browse Safely.<br><span class="text-gradient-light">Click Confidently.</span></h2>
+    <p>Join 2 million+ users protected by PhishGuard every day.</p>
+    <button class="btn btn-fcta" onclick="openInstallModal()">Install PhishGuard — It's Free</button>
+    <p class="fcta-note">Available for Chrome, Firefox, and Edge · No account required</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="url(#gf)"/><defs><linearGradient id="gf" x1="3" y1="2" x2="21" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#3b6ef8"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg>
+      PhishGuard
+    </div>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+    </div>
+    <div class="footer-copy">© 2025 PhishGuard. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- TOOLBAR INDICATOR -->
+<div class="toolbar-indicator" id="toolbarIndicator">
+  <div class="ti-browser-bar">
+    <div class="ti-dots"><span></span><span></span><span></span></div>
+    <div class="ti-url-bar">
+      <span class="ti-lock" id="tiLock">🔒</span>
+      <span class="ti-url-text" id="tiUrlText">phishguard.io</span>
+    </div>
+    <div class="ti-ext-icon" id="tiExtIcon">
+      <div class="ti-shield" id="tiShield">🛡️</div>
+      <div class="ti-dot-indicator" id="tiDot"></div>
+    </div>
+  </div>
+  <div class="ti-popup" id="tiPopup">
+    <div class="ti-popup-status" id="tiPopupStatus">Waiting for scan...</div>
+    <div class="ti-popup-domain" id="tiPopupDomain">—</div>
+  </div>
+</div>
+
+<!-- BLOCK SCREEN -->
+<div class="block-screen" id="blockScreen">
+  <div class="block-screen-inner">
+    <div class="block-screen-icon">🚫</div>
+    <h2 class="block-screen-title">Access Blocked</h2>
+    <p class="block-screen-sub">PhishGuard has blocked this site to protect you.</p>
+    <div class="block-screen-domain" id="blockScreenDomain"></div>
+    <div class="block-screen-url" id="blockScreenUrl"></div>
+    <div class="block-screen-reason">⚠️ This site was flagged as a phishing threat and automatically added to your blocklist.</div>
+    <div class="block-screen-btns">
+      <button class="btn btn-fcta" onclick="closeBlockScreen()">← Go Back to Safety</button>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCKLIST MODAL -->
+<div class="modal-overlay" id="blocklistModal">
+  <div class="modal-box" style="max-width:500px">
+    <button class="modal-close" onclick="closeBlocklistModal()" aria-label="Close">✕</button>
+    <div class="modal-shield">🚫</div>
+    <h3>Blocked Sites</h3>
+    <p>Sites PhishGuard has automatically blocked to protect you.</p>
+    <div id="blocklistItems" style="margin:20px 0;max-height:300px;overflow-y:auto"></div>
+    <button class="btn btn-primary-sm" style="width:100%;justify-content:center" onclick="closeBlocklistModal()">Close</button>
+  </div>
+</div>
+
+<!-- INSTALL MODAL -->
+<div class="modal-overlay" id="installModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeInstallModal()" aria-label="Close">✕</button>
+    <div class="modal-shield">🛡️</div>
+    <h3 id="modalTitle">Install PhishGuard</h3>
+    <p id="modalSubtitle">Choose your browser to get started — it's completely free.</p>
+    <div class="modal-browsers">
+      <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener" class="mbtn" id="chromeBtn">
+        <div class="mbtn-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4285F4"/><circle cx="12" cy="12" r="4" fill="white"/><path d="M12 2a10 10 0 010 20" fill="none" stroke="#EA4335" stroke-width="3"/><path d="M2 12h10" fill="none" stroke="#FBBC05" stroke-width="3"/><path d="M12 12l5-8.66" fill="none" stroke="#34A853" stroke-width="3"/></svg>
+        </div>
+        <div class="mbtn-text"><strong>Google Chrome</strong><small>Chrome Web Store</small></div>
+        <span class="mbtn-arrow">→</span>
+      </a>
+      <a href="https://addons.mozilla.org" target="_blank" rel="noopener" class="mbtn" id="firefoxBtn">
+        <div class="mbtn-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF6611"/><path d="M12 4c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8z" fill="#FF9500"/><circle cx="12" cy="12" r="4" fill="#FF6611"/></svg>
+        </div>
+        <div class="mbtn-text"><strong>Mozilla Firefox</strong><small>Firefox Add-ons</small></div>
+        <span class="mbtn-arrow">→</span>
+      </a>
+      <a href="https://microsoftedge.microsoft.com/addons" target="_blank" rel="noopener" class="mbtn" id="edgeBtn">
+        <div class="mbtn-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0078D4"/><path d="M6 14c0-3.3 2.7-6 6-6s6 2.7 6 6" fill="none" stroke="white" stroke-width="2"/><path d="M8 16h8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="mbtn-text"><strong>Microsoft Edge</strong><small>Edge Add-ons Store</small></div>
+        <span class="mbtn-arrow">→</span>
+      </a>
+    </div>
+    <p class="modal-note">🔒 Free forever · No account required · Open source</p>
+  </div>
+</div>
+
+<script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
