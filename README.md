@@ -7,7 +7,7 @@
 
 ### 🏆 Achievement Spotlight
 <div align="center">
-  <img src="https://www.isteonline.in/Images/ISTE_Logo.png" width="100" alt="ISTE Logo">
+  <img src="[https://www.isteonline.in/Images/ISTE_Logo.png](https://membership.isteonline.in/)" width="100" alt="ISTE Logo">
   <br>
   <b>1st Prize Winner</b>
   <br>
@@ -61,7 +61,7 @@ This project is developed and maintained by the **ISTE Co-ordinators** of **Moha
 #### Local Installation
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/phishing-app.git
+   git clone https://github.com/your-username/Team-Nova.git
    ```
 2. **Install dependencies**:
    ```bash
@@ -77,7 +77,7 @@ This project is developed and maintained by the **ISTE Co-ordinators** of **Moha
 ---
 
 ### 📜 Credits & Recognition
-Special thanks to our **ISTE Co-ordinators** and **Mohan Babu University** for their guidance and support. This project stands as a testament to the technical excellence fostered within our institution.
+Congratulations to the **ISTE Co-ordinators** and **Mohan Babu University** for fostering innovation and a platform to showcase technical talent. This project stands as a testament to the creativity, teamwork, and technical excellence nurtured within our institution.
 
 ---
 <div align="center">
