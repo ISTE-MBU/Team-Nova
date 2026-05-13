@@ -7,7 +7,7 @@
 
 ### 🏆 Achievement Spotlight
 <div align="center">
-  <img src="https://ic-wings2025.mitmuzaffarpur.org/ISTE%20logo.png" width="100" alt="ISTE Logo">
+  <img src="https://membership.isteonline.in/static/media/istelogo2.055fc6da.png" width="100" alt="ISTE Logo">
   <br>
   <b>1st Prize Winner</b>
   <br>
