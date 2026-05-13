@@ -7,7 +7,7 @@
 
 ### 🏆 Achievement Spotlight
 <div align="center">
-  <img src="[https://www.isteonline.in/Images/ISTE_Logo.png](https://membership.isteonline.in/)" width="100" alt="ISTE Logo">
+  <img src="https://membership.isteonline.in/" width="100" alt="ISTE Logo">
   <br>
   <b>1st Prize Winner</b>
   <br>
